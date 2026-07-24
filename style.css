@@ -62,6 +62,13 @@ body.is-loading{ overflow:hidden; }
 :root[data-seen="1"] .loader{ --run:900ms; }   /* already seen it this session */
 .loader.is-done{ opacity:0; pointer-events:none; transition:opacity .8s var(--ease); }
 
+/* The square opens from the middle, so it does not reach the top edge until
+   well over half way through. Until then the finished progress bar just sits
+   there, and then swaps abruptly for the nav. Fade the loader as the square
+   starts growing: its background is the same colour as the page, so only the
+   bar actually goes anywhere. */
+.loader.is-opening{ opacity:0; pointer-events:none; transition:opacity .45s var(--ease); }
+
 /* hairline across the very top, filling left to right */
 .loader__bar{
   position:absolute; top:0; left:0; right:0; height:2px; background:var(--line);

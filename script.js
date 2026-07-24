@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw(0);
       site.classList.remove('is-hidden');
       site.classList.add('is-revealing');
+      loader.classList.add('is-opening');   // drop the bar before the square gets there
 
       const t0 = performance.now();
       const step = now => {
