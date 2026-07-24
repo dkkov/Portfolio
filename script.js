@@ -209,11 +209,18 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const group = [...entry.target.parentElement.children].filter(c => c.classList.contains('reveal'));
-      entry.target.style.transitionDelay = Math.min(group.indexOf(entry.target), 8) * 70 + 'ms';
+      // a short cascade reads as intentional; a long one reads as slow loading
+      entry.target.style.transitionDelay = Math.min(group.indexOf(entry.target), 5) * 40 + 'ms';
       entry.target.classList.add('is-in');
       obs.unobserve(entry.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, {
+    threshold: 0,
+    // Start a third of a screen early. The old value was negative, which meant
+    // an element had to be 40px INSIDE the viewport before it began appearing —
+    // so you always caught it as an empty white box first.
+    rootMargin: '0px 0px 33% 0px'
+  });
 
   targets.forEach(el => revealer.observe(el));
 

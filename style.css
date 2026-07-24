@@ -14,7 +14,14 @@
 
 *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
 
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+html{
+  scroll-behavior:smooth; -webkit-text-size-adjust:100%;
+  /* Reserve the scrollbar strip permanently. The loader locks scrolling with
+     overflow:hidden, so without this the bar disappears while the loader runs
+     and comes back the instant the site is revealed — widening then narrowing
+     the viewport by ~15px and lurching the whole layout sideways. */
+  scrollbar-gutter:stable;
+}
 
 body{
   background:var(--bg); color:var(--ink);
@@ -542,7 +549,7 @@ body.is-loading{ overflow:hidden; }
 .reveal{ opacity:0; transform:translateY(20px); }
 .reveal.is-in{
   opacity:1; transform:none;
-  transition:opacity .9s var(--ease), transform .9s var(--ease);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
 }
 .ph.reveal.is-in{ transform:translateY(var(--drift,0)) rotate(var(--r)); }
 
@@ -550,7 +557,7 @@ body.is-loading{ overflow:hidden; }
 .wipe img{ clip-path:inset(0 0 100% 0); transform:scale(1.06); }
 .wipe.is-in img{
   clip-path:inset(0 0 0 0); transform:none;
-  transition:clip-path 1s var(--ease), transform 1.2s var(--ease);
+  transition:clip-path .7s var(--ease), transform .9s var(--ease);
 }
 
 @media (prefers-reduced-motion: reduce){
