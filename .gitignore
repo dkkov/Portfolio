@@ -1,7 +1,8 @@
 # local editor / agent config — contains absolute paths from this machine
 .claude/
 
-# source drop for the photos; the 17 the site actually uses live in images/
+# untouched originals, ~32 MB; the web-sized copies sit in images/
+images/_source/
 IMG/
 IMG_9638.PNG
 

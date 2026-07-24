@@ -196,14 +196,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- scroll reveal ---------- */
   const targets = document.querySelectorAll(
     '.bigname, .hero__disciplines li, .hero__photo, .hero__frame, .project__head, .credits, ' +
-    '.project__left, .ph, .scribble, .floater, .circles figure, .says p, .tl, ' +
+    '.project__left, .ph, .scribble, .floater, .says p, .tl, ' +
     '.contact__eyebrow, .contact__title, .form, ' +
     '.foot__label, .foot__mail, .foot__socials'
   );
   targets.forEach(el => el.classList.add('reveal'));
 
   // anything holding a picture wipes open instead of fading in
-  document.querySelectorAll('.ph, .floater, .circles figure, .tl, .hero__frame')
+  document.querySelectorAll('.ph, .floater, .tl, .hero__frame')
     .forEach(el => el.classList.add('wipe'));
 
   const revealer = new IntersectionObserver((entries, obs) => {
