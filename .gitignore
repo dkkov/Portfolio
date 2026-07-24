@@ -1,0 +1,7 @@
+# local editor / agent config — contains absolute paths from this machine
+.claude/
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store

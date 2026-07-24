@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dmitry Kovalev — AI Business Process Automation</title>
+<meta name="description" content="I design and ship AI-driven automations that take repetitive business processes off your team: support desks, document intake, CRM hygiene and reporting." />
+<meta name="theme-color" content="#faf9f6" />
+
+<!-- Social preview. Replace https://example.com with the real domain once it is live -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Dmitry Kovalev — AI Business Process Automation" />
+<meta property="og:description" content="Automation architect. AI agents, systems integration and operations design for teams of 10 to 500 people." />
+<meta property="og:image" content="https://example.com/images/portrait-1160.jpg" />
+<meta property="og:url" content="https://example.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0d'/%3E%3Ctext x='50%25' y='53%25' dominant-baseline='middle' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='bold' fill='%23faf9f6'%3EDK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+
+<!-- without JS the loader never runs, so the page must not stay hidden -->
+<noscript><style>
+  .site{ opacity:1 !important; }
+  .loader{ display:none !important; }
+  body.is-loading{ overflow:auto !important; }
+</style></noscript>
+
+<!-- Runs before the body paints, so the shorter repeat-visit timing is already
+     in place by the time the loader appears. -->
+<script>
+  try {
+    if (sessionStorage.getItem('dk-seen') === '1') document.documentElement.dataset.seen = '1';
+    sessionStorage.setItem('dk-seen', '1');
+  } catch (e) {}
+</script>
+</head>
+<body class="is-loading">
+
+<!-- ============ LOADER ============
+     The count-up is a CSS animation on purpose: script.js sits after all the
+     markup, so a JS-driven start would sit frozen until the parser had walked
+     the whole document. CSS starts it on the first painted frame. -->
+<div class="loader" id="loader">
+  <div class="loader__bar"><i id="loaderFill"></i></div>
+  <div class="loader__row">
+    <div class="loader__travel" id="loaderTravel">
+      <span class="loader__num" id="loaderNum"></span>
+    </div>
+  </div>
+  <p class="loader__label">Loading</p>
+</div>
+
+<div class="site is-hidden" id="site">
+
+<!-- cursor bubble that follows the pointer over the collages -->
+<div class="cursor" id="cursor" aria-hidden="true"><span>drag</span></div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar" id="topbar">
+  <a href="#top" class="topbar__mark">DK<span>.</span></a>
+
+  <nav class="topbar__nav" id="topbarNav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#contact">Contact</a>
+    <!-- TODO: replace # with your real profile links -->
+    <div class="topbar__social">
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </nav>
+
+  <div class="topbar__right">
+    <a href="#contact" class="pill">Get in touch <span>&#8599;</span></a>
+    <a href="#" class="sq" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+    <a href="#" class="sq" aria-label="Telegram" target="_blank" rel="noopener">tg</a>
+  </div>
+
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="topbarNav">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ NAME ============ -->
+<h1 class="bigname" id="top"><span>DMITRY KOVALEV</span></h1>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <ul class="hero__disciplines">
+    <li>Process Automation</li>
+    <li>AI Agents</li>
+    <li>Systems Integration</li>
+    <li>Operations Design</li>
+  </ul>
+
+  <div class="hero__photo" id="heroPhoto">
+    <span class="sticker sticker--hero">automate<br />the boring</span>
+    <div class="hero__frame">
+      <img src="images/portrait-1160.jpg"
+           srcset="images/portrait-700.jpg 700w, images/portrait-1160.jpg 1160w"
+           sizes="(max-width: 640px) 78vw, 40vw"
+           width="1160" height="2118"
+           alt="Portrait of Dmitry Kovalev, automation architect" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="band" aria-label="Tools and platforms">
+  <div class="band__row">
+    <div class="band__track">
+      <div class="band__set">
+        <span>OPENAI</span><i class="chip chip--a"></i><span>CLAUDE</span><i class="chip chip--b"></i>
+        <span>N8N</span><i class="chip chip--c"></i><span>ZAPIER</span><i class="chip chip--d"></i>
+        <span>MAKE</span><i class="chip chip--e"></i><span>HUBSPOT</span><i class="chip chip--f"></i>
+      </div>
+      <div class="band__set" aria-hidden="true">
+        <span>OPENAI</span><i class="chip chip--a"></i><span>CLAUDE</span><i class="chip chip--b"></i>
+        <span>N8N</span><i class="chip chip--c"></i><span>ZAPIER</span><i class="chip chip--d"></i>
+        <span>MAKE</span><i class="chip chip--e"></i><span>HUBSPOT</span><i class="chip chip--f"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="band__row">
+    <div class="band__track band__track--rev">
+      <div class="band__set">
+        <span>AIRTABLE</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--a"></i>
+        <span>SUPABASE</span><i class="chip chip--e"></i><span>SLACK</span><i class="chip chip--b"></i>
+        <span>NOTION</span><i class="chip chip--f"></i><span>TWILIO</span><i class="chip chip--d"></i>
+      </div>
+      <div class="band__set" aria-hidden="true">
+        <span>AIRTABLE</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--a"></i>
+        <span>SUPABASE</span><i class="chip chip--e"></i><span>SLACK</span><i class="chip chip--b"></i>
+        <span>NOTION</span><i class="chip chip--f"></i><span>TWILIO</span><i class="chip chip--d"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECT ============ -->
+<section class="project" id="work">
+
+  <div class="project__head">
+    <h2 class="project__title">NORDWELL RETAIL</h2>
+    <span class="oval">Featured project <b>&#8594;</b></span>
+  </div>
+
+  <dl class="credits">
+    <dt>Year</dt><dd>2023 — Present</dd>
+    <dt>Project</dt><dd>Nordwell Retail</dd>
+    <dt>Disciplines</dt>
+    <dd>
+      Process mapping<br />
+      AI agent design &amp; prompt architecture<br />
+      Knowledge base engineering<br />
+      CRM + helpdesk integration<br />
+      Evaluation &amp; QA loop<br />
+      Team enablement (Claude API, n8n, Zendesk)
+    </dd>
+  </dl>
+
+  <div class="project__body">
+    <div class="project__left">
+      <p class="label-serif">Project</p>
+      <div class="project__text">
+        <p>Nordwell came to me with 4,200 support tickets a month across five channels, an eleven-hour first response time and a knowledge base nobody trusted. We rebuilt the entire intake layer around an AI agent that classifies, drafts and resolves — and escalates the second confidence drops.</p>
+        <p>Eight months in, 71% of tickets close without a human, first response sits under four minutes, and the same headcount handles three times the order volume. Every answer traces back to a source document, and a weekly eval run catches drift before customers ever feel it.</p>
+      </div>
+    </div>
+
+    <!-- collage -->
+    <div class="collage collage--project" data-cursor="view">
+      <figure class="ph" style="--x:2%;  --y:4%;  --w:38%; --r:-4deg;"><img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=900" width="900" height="675" alt="Abstract network of connected nodes representing an AI system" loading="lazy" /></figure>
+      <figure class="ph" style="--x:54%; --y:2%;  --w:38%; --r:4deg;"><img src="https://images.pexels.com/photos/8353802/pexels-photo-8353802.jpeg?auto=compress&cs=tinysrgb&w=900" width="900" height="675" alt="Analyst presenting dashboards to a seated team" loading="lazy" /></figure>
+      <figure class="ph" style="--x:4%;  --y:56%; --w:38%; --r:5deg;"><img src="https://images.pexels.com/photos/5716032/pexels-photo-5716032.jpeg?auto=compress&cs=tinysrgb&w=900" width="900" height="675" alt="Two people comparing printed charts and a tablet" loading="lazy" /></figure>
+      <figure class="ph" style="--x:56%; --y:54%; --w:38%; --r:-5deg;"><img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=900" width="900" height="675" alt="A robotic hand reaching towards a human hand" loading="lazy" /></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOATING PROJECTS ============ -->
+<section class="floaters">
+  <div class="floater" style="--r:-5deg;">
+    <img src="https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=500" width="500" height="500" alt="Hands marking up printed invoices and reports" loading="lazy" />
+    <b>LUMEN LOGISTICS</b><span>invoice intake &middot; 9 min &rarr; 20 sec</span>
+  </div>
+  <div class="floater" style="--r:4deg;">
+    <img src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=500" width="500" height="500" alt="Team gathered around a laptop, smiling" loading="lazy" />
+    <b>VERTA CLINIC</b><span>patient intake &middot; -52% no-shows</span>
+  </div>
+  <div class="floater" style="--r:-3deg;">
+    <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=500" width="500" height="500" alt="Two people shaking hands across a desk" loading="lazy" />
+    <b>OVI COMMERCE</b><span>lead routing &middot; +34% to demo</span>
+  </div>
+  <div class="floater" style="--r:6deg;">
+    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=500" width="500" height="500" alt="Hand pointing at a printed bar chart" loading="lazy" />
+    <b>KASTL MFG</b><span>ops reporting &middot; 2 analysts freed</span>
+  </div>
+</section>
+
+<!-- ============ CIRCLES ============ -->
+<section class="circles">
+  <figure><img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="700" alt="Colleagues shaking hands in a meeting room" loading="lazy" /></figure>
+  <figure><img src="https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="700" alt="Designer working at a desk covered in sketches" loading="lazy" /></figure>
+  <figure><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="700" alt="Developer typing at a multi-monitor workstation" loading="lazy" /></figure>
+  <figure><img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="700" alt="Overhead view of a team working around a table" loading="lazy" /></figure>
+</section>
+
+<!-- ============ ABOUT 1 ============ -->
+<section class="says says--right" id="about">
+  <p>I'm an automation architect, systems thinker and stubborn simplifier, driven by the gap between how a process is described and how it actually runs. My work lives where clear thinking meets ruthless tooling. I spent nine years inside operations — logistics, e-commerce support, back-office finance — before I ever touched an LLM. That's why my projects start with a whiteboard and a stopwatch, never with a prompt.</p>
+</section>
+
+<!-- ============ BIG COLLAGE ============ -->
+<div class="collage collage--wide" data-cursor="view">
+  <figure class="ph" style="--x:0%;    --y:10%; --w:18%; --r:-5deg;"><img src="https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="600" alt="A small white service robot" loading="lazy" /></figure>
+  <figure class="ph" style="--x:20.5%; --y:40%; --w:18%; --r:4deg;"><img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="600" alt="Overhead shot of a workshop around a wooden table" loading="lazy" /></figure>
+  <figure class="ph" style="--x:41%;   --y:6%;  --w:18%; --r:-3deg;"><img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="600" alt="Source code on a dark editor screen" loading="lazy" /></figure>
+  <figure class="ph" style="--x:61.5%; --y:44%; --w:18%; --r:5deg;"><img src="https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="600" alt="Engineer with a tablet in a server room" loading="lazy" /></figure>
+  <figure class="ph" style="--x:82%;   --y:12%; --w:18%; --r:-4deg;"><img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800" width="800" height="600" alt="Long-exposure light trails forming a network pattern" loading="lazy" /></figure>
+  <span class="scribble" style="--x:20%; --y:88%; --r:-6deg;">Lumen Logistics</span>
+  <span class="scribble" style="--x:50%; --y:92%; --r:3deg;">Verta Clinic</span>
+  <span class="scribble" style="--x:80%; --y:86%; --r:-3deg;">Kastl Mfg</span>
+</div>
+
+<!-- ============ ABOUT 2 ============ -->
+<section class="says says--center">
+  <p>Today I design and ship AI-driven automations for teams of ten to five hundred people. The good ones are invisible: tickets answer themselves, invoices reconcile overnight, the Monday report writes itself. Outside of work I'm endlessly curious about how people actually behave around systems they didn't ask for — which is why I spend as much time on training and change management as on code. Success isn't how clever the system is. It's how many hours nobody has to spend anymore.</p>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="timeline" id="timeline">
+
+  <div class="timeline__meta">
+    <p class="timeline__hint"><span class="timeline__wheel"></span> Scroll sideways</p>
+    <p class="timeline__count"><b id="tlIndex">01</b> / <span id="tlTotal">07</span></p>
+  </div>
+
+  <div class="timeline__scroll" id="timelineScroll">
+    <div class="timeline__track">
+
+      <article class="tl">
+        <b>2026</b>
+        <h3>Currently</h3>
+        <img src="https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="A robotic hand reaching towards a human hand" loading="lazy" />
+        <p>Today I run automation programmes end to end — from the first process map to the eval suite that keeps an agent honest six months after launch.</p>
+      </article>
+
+      <article class="tl">
+        <b>2025</b>
+        <h3>Kastl Ops Reporting</h3>
+        <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Hand pointing at a printed bar chart" loading="lazy" />
+        <p>Built a daily production digest that assembles itself from four disconnected systems and writes the summary in plain language. Two analysts stopped copy-pasting for good.</p>
+      </article>
+
+      <article class="tl">
+        <b>2024</b>
+        <h3>Verta Clinic Intake</h3>
+        <img src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Team gathered around a laptop, smiling" loading="lazy" />
+        <p>Patient forms triaged, records pre-filled and appointments booked without a phone call — cutting no-shows by more than half in the first quarter.</p>
+      </article>
+
+      <article class="tl">
+        <b>2023</b>
+        <h3>Nordwell AI Desk</h3>
+        <img src="https://images.pexels.com/photos/8353802/pexels-photo-8353802.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Analyst presenting dashboards to a seated team" loading="lazy" />
+        <p>Rebuilt a five-channel support operation around a source-grounded AI agent with confidence routing. 71% of tickets now close without a human touching them.</p>
+      </article>
+
+      <article class="tl">
+        <b>2022</b>
+        <h3>Lumen Invoice Engine</h3>
+        <img src="https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Hands marking up printed invoices and reports" loading="lazy" />
+        <p>PDF and email invoices parsed, validated against purchase orders and pushed straight into the ERP. Nine minutes of manual entry became twenty seconds.</p>
+      </article>
+
+      <article class="tl">
+        <b>2021</b>
+        <h3>First RPA Rollout</h3>
+        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Colleagues shaking hands in a meeting room" loading="lazy" />
+        <p>The project that started it all: a back-office reconciliation bot that taught me automation succeeds or fails on change management, not on code.</p>
+      </article>
+
+      <article class="tl">
+        <b>2017</b>
+        <h3>Operations Years</h3>
+        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=700" width="700" height="525" alt="Overhead shot of a workshop around a wooden table" loading="lazy" />
+        <p>Nine years inside logistics, e-commerce support and back-office finance — learning exactly which parts of a working day nobody should be doing by hand.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="timeline__progress"><i id="tlProgress"></i></div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="contact__head">
+    <p class="contact__eyebrow">Contact</p>
+    <h2 class="contact__title">Got a process that eats your week? <em>Let's automate it.</em></h2>
+  </div>
+
+  <form class="form" id="contactForm" novalidate>
+    <div class="form__grid">
+      <label class="field">
+        <span>Name</span>
+        <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+        <em class="field__err" data-err="name"></em>
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@company.com" required />
+        <em class="field__err" data-err="email"></em>
+      </label>
+    </div>
+
+    <label class="field">
+      <span>What should stop being manual?</span>
+      <textarea name="message" rows="4" placeholder="Describe the process, who runs it today and how often it happens…" required></textarea>
+      <em class="field__err" data-err="message"></em>
+    </label>
+
+    <div class="form__foot">
+      <button type="submit" class="submit">Send message <span>&#8599;</span></button>
+      <p class="form__note" id="formNote" role="status"></p>
+    </div>
+  </form>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <p class="foot__label">Email</p>
+  <a class="foot__mail" href="mailto:kovalev4041@gmail.com">kovalev4041@gmail.com</a>
+
+  <!-- TODO: replace # with your real profile links -->
+  <div class="foot__socials">
+    <a href="#" target="_blank" rel="noopener"><i class="ic">in</i> LinkedIn</a>
+    <a href="#" target="_blank" rel="noopener"><i class="ic">tg</i> Telegram</a>
+  </div>
+
+  <div class="foot__bar">
+    <p>&copy; <span id="year">2026</span> Copyright Dmitry Kovalev</p>
+    <a href="#top" class="foot__top" aria-label="Back to top">&#8593;</a>
+    <p>Automating the boring since 2021</p>
+  </div>
+</footer>
+
+</div><!-- /.site -->
+
+<script src="script.js"></script>
+</body>
+</html>
