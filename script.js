@@ -133,9 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // the CSS phase ends on the bar; whichever happens last wins
       const barAnim = loaderFill.getAnimations()[0];
       const phaseOne = barAnim ? barAnim.finished : Promise.resolve();
+
+      // Waiting on window.load alone means parking on 94 for as long as the
+      // slowest image takes. Cap it: everything above the fold is in by then,
+      // and the rest of the pictures are lazy anyway.
       const loaded = pageLoaded
         ? Promise.resolve()
-        : new Promise(done => window.addEventListener('load', done, { once: true }));
+        : Promise.race([
+            new Promise(done => window.addEventListener('load', done, { once: true })),
+            new Promise(done => setTimeout(done, 1800))
+          ]);
 
       Promise.all([phaseOne, loaded]).then(runSettle).catch(() => {});
     }
