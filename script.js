@@ -6,16 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- loader: counts 1 → 100 while it crosses the screen ---------- */
+  /* ---------- loader: a bar across the top, then the site opens ---------- */
   const loader = document.getElementById('loader');
-  const loaderNum = document.getElementById('loaderNum');
   const loaderFill = document.getElementById('loaderFill');
   const site = document.getElementById('site');
 
   if (loader) {
     // the flag itself is set by the inline script in <head>, before first paint
     const seen = document.documentElement.dataset.seen === '1';
-    const loaderTravel = document.getElementById('loaderTravel');
 
     let pageLoaded = false;
     window.addEventListener('load', () => { pageLoaded = true; });
@@ -79,52 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const SETTLE = 560;
     const EASE_OUT = t => t * t * (3 - 2 * t);          // smoothstep
 
-    // @property is what makes the CSS counter animate; without it the digits
-    // would sit at 0, so fall back to writing them from the animation's clock
-    const hasProperty = typeof CSS !== 'undefined' && typeof CSS.registerProperty === 'function';
-
-    if (!hasProperty) {
-      loader.classList.add('no-counter');
-      const track = () => {
-        const anim = loaderFill.getAnimations()[0];
-        if (!anim || !anim.effect) return;
-        const timing = anim.effect.getTiming();
-        const t = Math.min((anim.currentTime || 0) / timing.duration, 1);
-        loaderNum.textContent = Math.round((1 - Math.pow(1 - t, 2.2)) * HOLD * 100);
-        if (t < 1) requestAnimationFrame(track);
-      };
-      requestAnimationFrame(track);
-    }
-
-    // the last 6% — transform only again, and the digits ride along on the
-    // registered custom property so they stay tied to the movement
+    // the last 6% — transform only again, so it stays on the compositor
     const runSettle = () => {
-      const opts = { duration: SETTLE, easing: 'linear', fill: 'forwards' };
       const stops = Array.from({ length: 21 }, (_, i) => {
         const t = i / 20;
-        return { t, v: HOLD + (1 - HOLD) * EASE_OUT(t) };
+        return { offset: t, transform: `scaleX(${(HOLD + (1 - HOLD) * EASE_OUT(t)).toFixed(5)})` };
       });
 
-      loaderTravel.animate(
-        stops.map(s => ({ offset: s.t, transform: `translate3d(${(s.v * 100).toFixed(3)}%,0,0)` })), opts);
-      loaderNum.animate(
-        stops.map(s => ({ offset: s.t, transform: `translate3d(${(-s.v * 100).toFixed(3)}%,0,0)` })), opts);
-      const bar = loaderFill.animate(
-        stops.map(s => ({ offset: s.t, transform: `scaleX(${s.v.toFixed(5)})` })), opts);
-
-      // digits for the tail: one cheap write per frame, and by now the main
-      // thread is free because the page has finished loading
-      const t0 = performance.now();
-      const countUp = () => {
-        const t = Math.min((performance.now() - t0) / SETTLE, 1);
-        const v = HOLD + (1 - HOLD) * EASE_OUT(t);
-        if (hasProperty) loaderNum.style.setProperty('--dk-n', Math.round(v * 100));
-        else loaderNum.textContent = Math.round(v * 100);
-        if (t < 1) requestAnimationFrame(countUp);
-      };
-      requestAnimationFrame(countUp);
-
-      bar.finished.then(() => setTimeout(finish, 240)).catch(() => {});   // let 100 sit
+      const bar = loaderFill.animate(stops, { duration: SETTLE, easing: 'linear', fill: 'forwards' });
+      bar.finished.then(() => setTimeout(finish, 200)).catch(() => {});   // let it sit full
     };
 
     if (reduceMotion) {

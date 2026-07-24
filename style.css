@@ -35,26 +35,23 @@ ul,ol,dl{ list-style:none; }
 
 body.is-loading{ overflow:hidden; }
 
+/* The bar runs in CSS so it starts on the very first painted frame, and it
+   animates transform only, so the compositor owns it and a main thread busy
+   with page load cannot stall it. Both were real faults before: the motion
+   used to wait for script.js (which sits after all the markup) and it used to
+   be written frame by frame into width, forcing layout every frame. */
+
 .loader{
   position:fixed; inset:0; z-index:200; background:var(--bg);
-  display:flex; flex-direction:column; justify-content:flex-end;
-  padding:var(--pad); gap:10px;
+  --run:3200ms;
 }
+:root[data-seen="1"] .loader{ --run:900ms; }   /* already seen it this session */
 .loader.is-done{ opacity:0; pointer-events:none; transition:opacity .8s var(--ease); }
 
-/* The whole count-up runs in CSS so it starts on the very first painted frame,
-   and it animates transform only, so the compositor owns it and a main thread
-   busy with page load cannot stall it. Both were real faults before: the motion
-   used to wait for script.js (which sits after all the markup) and it used to
-   be written frame by frame into width / left, forcing layout every frame. */
-
-@property --dk-n { syntax:'<integer>'; initial-value:0; inherits:false; }
-
-.loader{ --run:3200ms; }
-:root[data-seen="1"] .loader{ --run:900ms; }   /* already seen it this session */
-
-/* hairline that fills left to right */
-.loader__bar{ height:1.5px; background:var(--line); position:relative; order:-1; margin-bottom:auto; }
+/* hairline across the very top, filling left to right */
+.loader__bar{
+  position:absolute; top:0; left:0; right:0; height:2px; background:var(--line);
+}
 .loader__bar i{
   position:absolute; inset:0; display:block; background:var(--ink);
   transform:scaleX(0); transform-origin:left center;
@@ -62,63 +59,12 @@ body.is-loading{ overflow:hidden; }
   animation:dkBar var(--run) linear forwards;
 }
 
-/* The counter travels the width of the row minus its own width. Two animations
-   do it: the wrapper moves by a share of the row, the number pulls back by the
-   same share of itself. Both sit on one timeline, so they cannot drift. */
-.loader__row{ position:relative; height:clamp(60px,15vw,190px); }
-.loader__travel{
-  position:absolute; bottom:0; left:0; width:100%;
-  transform:translate3d(0,0,0); will-change:transform; backface-visibility:hidden;
-  animation:dkOut var(--run) linear forwards;
-}
-.loader__num{
-  display:inline-block;
-  transform:translate3d(0,0,0); will-change:transform; backface-visibility:hidden;
-  font-family:'Archivo','Inter',sans-serif; font-variation-settings:'wdth' 74;
-  font-size:clamp(56px,14vw,180px); font-weight:800; letter-spacing:-.04em; line-height:.85;
-  white-space:nowrap;
-  /* fixed box so 9 → 10 → 100 never shifts it. The width is in em, not ch:
-     ch is the width of the font's own zero, so it would change the instant the
-     webfont swapped in and jog the counter mid-run. */
-  font-variant-numeric:tabular-nums; font-feature-settings:'tnum' 1;
-  width:1.95em; text-align:center;
-  counter-reset:dkn var(--dk-n);
-  animation:dkBack var(--run) linear forwards, dkCount var(--run) linear forwards;
-}
-.loader__num::after{ content:counter(dkn); }
-/* browsers without @property never animate --dk-n, so JS writes the digits */
-.loader.no-counter .loader__num::after{ content:none; }
-
-/* 1 - (1-t)^2.2, stopping at 94 — the last 6 wait for the page to finish */
+/* 1 - (1-t)^2.2, stopping at 94% — the last 6 wait for the page to finish */
 @keyframes dkBar{
   0%{transform:scaleX(0)}      10%{transform:scaleX(.1945)} 20%{transform:scaleX(.3646)}
   30%{transform:scaleX(.5112)} 40%{transform:scaleX(.6345)} 50%{transform:scaleX(.7354)}
   60%{transform:scaleX(.8148)} 70%{transform:scaleX(.8735)} 80%{transform:scaleX(.9127)}
   90%{transform:scaleX(.9341)} 100%{transform:scaleX(.94)}
-}
-@keyframes dkOut{
-  0%{transform:translate3d(0,0,0)}         10%{transform:translate3d(19.45%,0,0)}
-  20%{transform:translate3d(36.46%,0,0)}   30%{transform:translate3d(51.12%,0,0)}
-  40%{transform:translate3d(63.45%,0,0)}   50%{transform:translate3d(73.54%,0,0)}
-  60%{transform:translate3d(81.48%,0,0)}   70%{transform:translate3d(87.35%,0,0)}
-  80%{transform:translate3d(91.27%,0,0)}   90%{transform:translate3d(93.41%,0,0)}
-  100%{transform:translate3d(94%,0,0)}
-}
-@keyframes dkBack{
-  0%{transform:translate3d(0,0,0)}          10%{transform:translate3d(-19.45%,0,0)}
-  20%{transform:translate3d(-36.46%,0,0)}   30%{transform:translate3d(-51.12%,0,0)}
-  40%{transform:translate3d(-63.45%,0,0)}   50%{transform:translate3d(-73.54%,0,0)}
-  60%{transform:translate3d(-81.48%,0,0)}   70%{transform:translate3d(-87.35%,0,0)}
-  80%{transform:translate3d(-91.27%,0,0)}   90%{transform:translate3d(-93.41%,0,0)}
-  100%{transform:translate3d(-94%,0,0)}
-}
-@keyframes dkCount{
-  0%{--dk-n:0}   10%{--dk-n:19} 20%{--dk-n:36} 30%{--dk-n:51} 40%{--dk-n:63}
-  50%{--dk-n:74} 60%{--dk-n:81} 70%{--dk-n:87} 80%{--dk-n:91} 90%{--dk-n:93}
-  100%{--dk-n:94}
-}
-.loader__label{
-  font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--soft);
 }
 
 /* ---------- site reveal: a square opens out of the centre ----------

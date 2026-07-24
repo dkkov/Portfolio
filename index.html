@@ -41,17 +41,11 @@
 <body class="is-loading">
 
 <!-- ============ LOADER ============
-     The count-up is a CSS animation on purpose: script.js sits after all the
-     markup, so a JS-driven start would sit frozen until the parser had walked
-     the whole document. CSS starts it on the first painted frame. -->
+     A CSS animation on purpose: script.js sits after all the markup, so a
+     JS-driven bar would sit frozen until the parser had walked the whole
+     document. CSS starts it on the first painted frame. -->
 <div class="loader" id="loader">
   <div class="loader__bar"><i id="loaderFill"></i></div>
-  <div class="loader__row">
-    <div class="loader__travel" id="loaderTravel">
-      <span class="loader__num" id="loaderNum"></span>
-    </div>
-  </div>
-  <p class="loader__label">Loading</p>
 </div>
 
 <div class="site is-hidden" id="site">
