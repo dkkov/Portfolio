@@ -16,12 +16,19 @@
 
 html{
   scroll-behavior:smooth; -webkit-text-size-adjust:100%;
-  /* Reserve the scrollbar strip permanently. The loader locks scrolling with
-     overflow:hidden, so without this the bar disappears while the loader runs
-     and comes back the instant the site is revealed — widening then narrowing
-     the viewport by ~15px and lurching the whole layout sideways. */
-  scrollbar-gutter:stable;
+  /* Hide the native scrollbar. Besides being visual noise against this layout,
+     it takes the reveal lurch with it: the loader locks scrolling with
+     overflow:hidden, so a visible bar vanished while the loader ran and came
+     back the instant the site appeared, moving the whole layout ~15px sideways.
+     At zero width there is nothing left to appear, so no gutter needs reserving
+     either. Wheel, keyboard and touch scrolling are all unaffected. */
+  scrollbar-width:none;              /* Firefox */
+  /* body alone is not enough: with overflow-x only there, the root element
+     still scrolls, which left a few pixels of sideways drift on phones */
+  overflow-x:hidden;
 }
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{ width:0; height:0; display:none; }   /* Chromium, Safari */
 
 body{
   background:var(--bg); color:var(--ink);
