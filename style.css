@@ -640,7 +640,19 @@ body.is-loading{ overflow:hidden; }
 @media (max-width:640px){
   .hero{ grid-template-columns:1fr; }
   .hero__photo{ width:min(78%, 320px); margin-left:auto; }
-  .credits{ column-gap:20px; }
+
+  /* the oval used to sit beside the heading and land on top of it once the
+     heading wrapped onto two lines; below it, upright, there is nothing to hit */
+  .project__head{ flex-direction:column; align-items:flex-start; gap:14px; }
+  .oval{ margin-left:0; transform:rotate(-4deg); }
+
+  /* labels above values reads far better than two cramped columns */
+  .credits{ grid-template-columns:1fr; row-gap:4px; }
+  .credits dt{ margin-top:14px; color:var(--soft); }
+  .credits dt:first-of-type{ margin-top:0; }
+
+  .project__body{ gap:26px; }
+  .project__text{ margin-left:0; }
 
   /* touch: swipe the rail by hand, so snapping back on is useful */
   .timeline__scroll{ scroll-snap-type:x mandatory; }
@@ -648,13 +660,39 @@ body.is-loading{ overflow:hidden; }
   .timeline__hint{ display:none; }
   .timeline__meta{ justify-content:flex-end; }
 
-  /* collages become simple scattered stacks that still fit */
-  .collage{ aspect-ratio:auto !important; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .ph{ position:static; width:auto !important; transform:rotate(var(--r)); }
+  /* Collages become a plain grid. The tilt has to go with the absolute
+     positioning: a rotated full-width card pushes its corners past both edges
+     of the screen and gets clipped. */
+  .collage{
+    aspect-ratio:auto !important; display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    padding:0 var(--pad);            /* line the photos up with the text above */
+  }
+  .collage--wide, .collage--project{ margin-top:26px; }
+  /* the .ph.reveal.is-in rule further up is more specific, so the tilt has to
+     be cancelled at matching weight or it survives into the mobile grid */
+  .ph, .ph.reveal, .ph.reveal.is-in, .ph:hover{
+    position:static; width:auto !important; transform:none;
+    padding:4px; box-shadow:0 6px 16px rgba(0,0,0,.12);
+  }
   .ph img{ aspect-ratio:4/3 !important; }
-  .scribble{ position:static; transform:rotate(var(--r)); grid-column:1/-1; text-align:center; }
-  .says p{ max-width:none; }
+  .scribble{
+    position:static; transform:none; grid-column:1/-1; text-align:center;
+    font-size:15px; line-height:1.15; margin:0;
+  }
+  .scribble:first-of-type{ margin-top:6px; }
 
+  .says p{ max-width:none; }
+  .says{ padding:clamp(38px,9vw,60px) var(--pad); }
+
+  /* four full-width squares meant four screens of scrolling on their own */
+  .floaters{ grid-template-columns:1fr 1fr; gap:22px 14px; padding:clamp(38px,9vw,60px) var(--pad); }
+  .floater{ transform:none; }
+  .floater:hover{ transform:none; }
+  .floater b{ margin-top:10px; font-size:10px; letter-spacing:.12em; }
+  .floater span{ font-size:9.5px; }
+
+  .contact{ padding:clamp(46px,10vw,80px) var(--pad) 30px; }
+  .contact__title{ font-size:clamp(26px,7.6vw,38px); max-width:none; }
   .form__grid{ grid-template-columns:1fr; gap:0; }
   .form__foot{ flex-direction:column; align-items:flex-start; gap:14px; }
   .submit{ width:100%; justify-content:center; }
@@ -662,8 +700,6 @@ body.is-loading{ overflow:hidden; }
 
 /* narrow phones */
 @media (max-width:400px){
-  .floaters{ grid-template-columns:1fr; }
-  .collage{ grid-template-columns:1fr !important; }
   .hero__photo{ width:100%; }
   /* the photo now runs edge to edge, so the sticker has to come inside it */
   .sticker--hero{ left:auto; right:-2%; top:-4%; }
