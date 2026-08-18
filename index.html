@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dmitry Kovalev — AI Business Process Automation</title>
-<meta name="description" content="I design and ship AI-driven automations that take repetitive business processes off your team: support desks, document intake, CRM hygiene and reporting." />
+<title>Dmitry Kovalev &mdash; AI Automation for Content &amp; Marketing Teams</title>
+<meta name="description" content="I build AI systems that take repetitive work off your team &mdash; chatbots that answer questions and book clients, and agents that run content pipelines end to end. Live demos you can click." />
 <meta name="theme-color" content="#faf9f6" />
 
-<!-- Social preview. Replace https://example.com with the real domain once it is live -->
+<!-- Social preview -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Dmitry Kovalev — AI Business Process Automation" />
-<meta property="og:description" content="Automation architect. AI agents, systems integration and operations design for teams of 10 to 500 people." />
-<meta property="og:image" content="https://example.com/images/portrait-1160.jpg" />
-<meta property="og:url" content="https://example.com/" />
+<meta property="og:title" content="Dmitry Kovalev &mdash; AI Automation for Content &amp; Marketing Teams" />
+<meta property="og:description" content="AI chatbots, agents and content pipelines. Grounded answers, real tool calls, self-checked. Click a live demo." />
+<meta property="og:image" content="https://portfolio-nine-omega-jr0xq0so6d.vercel.app/images/portrait-1160.jpg" />
+<meta property="og:url" content="https://portfolio-nine-omega-jr0xq0so6d.vercel.app/" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0d'/%3E%3Ctext x='50%25' y='53%25' dominant-baseline='middle' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='bold' fill='%23faf9f6'%3EDK%3C/text%3E%3C/svg%3E" />
@@ -29,8 +29,6 @@
   body.is-loading{ overflow:auto !important; }
 </style></noscript>
 
-<!-- Runs before the body paints, so the shorter repeat-visit timing is already
-     in place by the time the loader appears. -->
 <script>
   try {
     if (sessionStorage.getItem('dk-seen') === '1') document.documentElement.dataset.seen = '1';
@@ -40,10 +38,7 @@
 </head>
 <body class="is-loading">
 
-<!-- ============ LOADER ============
-     A CSS animation on purpose: script.js sits after all the markup, so a
-     JS-driven bar would sit frozen until the parser had walked the whole
-     document. CSS starts it on the first painted frame. -->
+<!-- ============ LOADER ============ -->
 <div class="loader" id="loader">
   <div class="loader__bar"><i id="loaderFill"></i></div>
 </div>
@@ -60,19 +55,18 @@
   <nav class="topbar__nav" id="topbarNav" aria-label="Main">
     <a href="#work">Work</a>
     <a href="#about">About</a>
-    <a href="#timeline">Timeline</a>
+    <a href="#timeline">Path</a>
     <a href="#contact">Contact</a>
-    <!-- TODO: replace # with your real profile links -->
     <div class="topbar__social">
-      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://www.upwork.com/freelancers/~0150fdf67bd1039708" target="_blank" rel="noopener">Upwork</a>
+      <a href="mailto:kovalev4041@gmail.com">Email</a>
     </div>
   </nav>
 
   <div class="topbar__right">
     <a href="#contact" class="pill">Get in touch <span>&#8599;</span></a>
-    <a href="#" class="sq" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
-    <a href="#" class="sq" aria-label="Telegram" target="_blank" rel="noopener">tg</a>
+    <a href="https://www.upwork.com/freelancers/~0150fdf67bd1039708" class="sq" aria-label="Upwork" target="_blank" rel="noopener">Up</a>
+    <a href="mailto:kovalev4041@gmail.com" class="sq" aria-label="Email">@</a>
   </div>
 
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="topbarNav">
@@ -86,10 +80,10 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <ul class="hero__disciplines">
-    <li>Process Automation</li>
+    <li>AI Chatbots</li>
     <li>AI Agents</li>
-    <li>Systems Integration</li>
-    <li>Operations Design</li>
+    <li>Content Automation</li>
+    <li>AI + Video</li>
   </ul>
 
   <div class="hero__photo" id="heroPhoto">
@@ -99,7 +93,7 @@
            srcset="images/portrait-700.jpg 700w, images/portrait-1160.jpg 1160w"
            sizes="(max-width: 640px) 78vw, 40vw"
            width="1160" height="2118"
-           alt="Portrait of Dmitry Kovalev, automation architect" />
+           alt="Portrait of Dmitry Kovalev" />
     </div>
   </div>
 </section>
@@ -109,14 +103,14 @@
   <div class="band__row">
     <div class="band__track">
       <div class="band__set">
-        <span>OPENAI</span><i class="chip chip--a"></i><span>CLAUDE</span><i class="chip chip--b"></i>
-        <span>N8N</span><i class="chip chip--c"></i><span>ZAPIER</span><i class="chip chip--d"></i>
-        <span>MAKE</span><i class="chip chip--e"></i><span>HUBSPOT</span><i class="chip chip--f"></i>
+        <span>CLAUDE</span><i class="chip chip--a"></i><span>OPENAI</span><i class="chip chip--b"></i>
+        <span>GEMINI</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--d"></i>
+        <span>RAG</span><i class="chip chip--e"></i><span>SUPABASE</span><i class="chip chip--f"></i>
       </div>
       <div class="band__set" aria-hidden="true">
-        <span>OPENAI</span><i class="chip chip--a"></i><span>CLAUDE</span><i class="chip chip--b"></i>
-        <span>N8N</span><i class="chip chip--c"></i><span>ZAPIER</span><i class="chip chip--d"></i>
-        <span>MAKE</span><i class="chip chip--e"></i><span>HUBSPOT</span><i class="chip chip--f"></i>
+        <span>CLAUDE</span><i class="chip chip--a"></i><span>OPENAI</span><i class="chip chip--b"></i>
+        <span>GEMINI</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--d"></i>
+        <span>RAG</span><i class="chip chip--e"></i><span>SUPABASE</span><i class="chip chip--f"></i>
       </div>
     </div>
   </div>
@@ -124,14 +118,14 @@
   <div class="band__row">
     <div class="band__track band__track--rev">
       <div class="band__set">
-        <span>AIRTABLE</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--a"></i>
-        <span>SUPABASE</span><i class="chip chip--e"></i><span>SLACK</span><i class="chip chip--b"></i>
-        <span>NOTION</span><i class="chip chip--f"></i><span>TWILIO</span><i class="chip chip--d"></i>
+        <span>NODE.JS</span><i class="chip chip--c"></i><span>TYPESCRIPT</span><i class="chip chip--a"></i>
+        <span>TELEGRAM</span><i class="chip chip--e"></i><span>VERCEL</span><i class="chip chip--b"></i>
+        <span>RENDER</span><i class="chip chip--f"></i><span>N8N</span><i class="chip chip--d"></i>
       </div>
       <div class="band__set" aria-hidden="true">
-        <span>AIRTABLE</span><i class="chip chip--c"></i><span>PYTHON</span><i class="chip chip--a"></i>
-        <span>SUPABASE</span><i class="chip chip--e"></i><span>SLACK</span><i class="chip chip--b"></i>
-        <span>NOTION</span><i class="chip chip--f"></i><span>TWILIO</span><i class="chip chip--d"></i>
+        <span>NODE.JS</span><i class="chip chip--c"></i><span>TYPESCRIPT</span><i class="chip chip--a"></i>
+        <span>TELEGRAM</span><i class="chip chip--e"></i><span>VERCEL</span><i class="chip chip--b"></i>
+        <span>RENDER</span><i class="chip chip--f"></i><span>N8N</span><i class="chip chip--d"></i>
       </div>
     </div>
   </div>
@@ -141,21 +135,21 @@
 <section class="project" id="work">
 
   <div class="project__head">
-    <h2 class="project__title">NORDWELL RETAIL</h2>
-    <span class="oval">Featured project <b>&#8594;</b></span>
+    <h2 class="project__title">AI ENROLMENT ASSISTANT</h2>
+    <span class="oval">Live demo <b>&#8594;</b></span>
   </div>
 
   <dl class="credits">
-    <dt>Year</dt><dd>2023 — Present</dd>
-    <dt>Project</dt><dd>Nordwell Retail</dd>
-    <dt>Disciplines</dt>
+    <dt>Year</dt><dd>2025</dd>
+    <dt>Project</dt><dd>School assistant &middot; online English school</dd>
+    <dt>What I built</dt>
     <dd>
-      Process mapping<br />
-      AI agent design &amp; prompt architecture<br />
-      Knowledge base engineering<br />
-      CRM + helpdesk integration<br />
-      Evaluation &amp; QA loop<br />
-      Team enablement (Claude API, n8n, Zendesk)
+      RAG knowledge base (single source of truth)<br />
+      Intent routing (pricing / booking / general)<br />
+      Real tool call &mdash; captures &amp; validates leads<br />
+      Memory + a self-check layer on every answer<br />
+      Supabase + instant Telegram notifications<br />
+      Shipped on Render (Python, Google Gemini)
     </dd>
   </dl>
 
@@ -163,59 +157,60 @@
     <div class="project__left">
       <p class="label-serif">Project</p>
       <div class="project__text">
-        <p>Nordwell came to me with 4,200 support tickets a month across five channels, an eleven-hour first response time and a knowledge base nobody trusted. We rebuilt the entire intake layer around an AI agent that classifies, drafts and resolves — and escalates the second confidence drops.</p>
-        <p>Eight months in, 71% of tickets close without a human, first response sits under four minutes, and the same headcount handles three times the order volume. Every answer traces back to a source document, and a weekly eval run catches drift before customers ever feel it.</p>
+        <p>A service business answers the same twenty questions all day &mdash; prices, schedule, policies &mdash; and loses everyone who asks after hours. I built a web chat assistant grounded strictly in the school's real pricing and rules: it answers, books a free trial by collecting and validating the lead, files it to a database and pings staff on Telegram.</p>
+        <p>It remembers the conversation and runs a self-check on every reply before sending it, so it never invents a price. No LangChain &mdash; the routing, memory and tool-calling are hand-built. Click through and talk to it yourself.</p>
+        <p><a class="oval" href="https://verbo-ai-t227.onrender.com" target="_blank" rel="noopener">Open the live demo <b>&#8599;</b></a></p>
       </div>
     </div>
 
     <!-- collage -->
-    <div class="collage collage--project" data-cursor="view">
+    <div class="collage collage--project" data-cursor="try">
       <figure class="ph" style="--x:4%;  --y:2%;  --w:40%; --r:-4deg;"><img src="images/12.jpg" width="1000" height="667" alt="Code editor with an AI actions menu open" /></figure>
-      <figure class="ph" style="--x:54%; --y:14%; --w:40%; --r:4deg;"><img src="images/1.jpg" width="612" height="383" alt="Laptop desk with analytics dashboards overlaid" /></figure>
-      <figure class="ph" style="--x:26%; --y:56%; --w:40%; --r:3deg;"><img src="images/17.jpg" width="612" height="408" alt="Support team working together in a bright office" /></figure>
+      <figure class="ph" style="--x:54%; --y:14%; --w:40%; --r:4deg;"><img src="images/1.jpg" width="612" height="383" alt="Laptop desk with analytics dashboards" /></figure>
+      <figure class="ph" style="--x:26%; --y:56%; --w:40%; --r:3deg;"><img src="images/17.jpg" width="612" height="408" alt="A bright office workspace" /></figure>
     </div>
   </div>
 </section>
 
 <!-- ============ FLOATING PROJECTS ============ -->
 <section class="floaters">
-  <div class="floater" style="--r:-5deg;">
-    <img src="images/20.jpg" width="1000" height="667" alt="Hands marking up printed invoices and charts" />
-    <b>LUMEN LOGISTICS</b><span>invoice intake &middot; 9 min &rarr; 20 sec</span>
-  </div>
+  <a class="floater" style="--r:-5deg;" href="https://t.me/youfitmy_bot" target="_blank" rel="noopener">
+    <img src="images/20.jpg" width="1000" height="667" alt="Content and charts on a desk" />
+    <b>AI CONTENT BOT</b><span>topic &rarr; published post &middot; live in Telegram</span>
+  </a>
   <div class="floater" style="--r:4deg;">
-    <img src="images/8.jpg" width="612" height="408" alt="Two people going through paperwork at a desk" />
-    <b>VERTA CLINIC</b><span>patient intake &middot; -52% no-shows</span>
+    <img src="images/8.jpg" width="612" height="408" alt="Two people reviewing paperwork" />
+    <b>AI + VIDEO PIPELINE</b><span>article &rarr; short vertical video &middot; in progress</span>
   </div>
   <div class="floater" style="--r:-3deg;">
-    <img src="images/16.jpg" width="1000" height="667" alt="Four colleagues joining hands over a meeting table" />
-    <b>OVI COMMERCE</b><span>lead routing &middot; +34% to demo</span>
+    <img src="images/16.jpg" width="1000" height="667" alt="Colleagues at a meeting table" />
+    <b>MULTI-NICHE TEMPLATE</b><span>config-driven &middot; new niche bot in ~2 days</span>
   </div>
-  <div class="floater" style="--r:6deg;">
-    <img src="images/22.jpg" width="1000" height="667" alt="Two people reviewing a chart on a laptop" />
-    <b>KASTL MFG</b><span>ops reporting &middot; 2 analysts freed</span>
-  </div>
+  <a class="floater" style="--r:6deg;" href="https://verbo-ai-t227.onrender.com" target="_blank" rel="noopener">
+    <img src="images/22.jpg" width="1000" height="667" alt="Two people reviewing a laptop" />
+    <b>SCHOOL ASSISTANT</b><span>grounded answers &middot; books trials &middot; live</span>
+  </a>
 </section>
 
 <!-- ============ ABOUT 1 ============ -->
 <section class="says says--right" id="about">
-  <p>I'm an automation architect, systems thinker and stubborn simplifier, driven by the gap between how a process is described and how it actually runs. My work lives where clear thinking meets ruthless tooling. I spent nine years inside operations — logistics, e-commerce support, back-office finance — before I ever touched an LLM. That's why my projects start with a whiteboard and a stopwatch, never with a prompt.</p>
+  <p>I came to AI from years of motion design and video production &mdash; After Effects, editing, delivery under deadline. That's my edge: I understand content operations from the inside, not just the code. I build the boring parts that make AI actually usable &mdash; grounded knowledge, real tool calls, memory, and a self-check layer that catches a bad answer before your customer ever sees it.</p>
 </section>
 
 <!-- ============ BIG COLLAGE ============ -->
 <div class="collage collage--wide" data-cursor="view">
   <figure class="ph" style="--x:1%;  --y:6%;  --w:20%; --r:-5deg;"><img src="images/2.jpg" width="1000" height="667" alt="A small white service robot" /></figure>
-  <figure class="ph" style="--x:27%; --y:44%; --w:20%; --r:4deg;"><img src="images/15.jpg" width="1000" height="667" alt="Code on a laptop screen beside a plant" /></figure>
-  <figure class="ph" style="--x:53%; --y:4%;  --w:20%; --r:-3deg;"><img src="images/21.jpg" width="667" height="1000" alt="Two colleagues working over a table covered in charts" /></figure>
-  <figure class="ph" style="--x:78%; --y:46%; --w:20%; --r:5deg;"><img src="images/23.jpg" width="1000" height="668" alt="A robotic arm handing something to a man" /></figure>
-  <span class="scribble" style="--x:20%; --y:88%; --r:-6deg;">Lumen Logistics</span>
-  <span class="scribble" style="--x:50%; --y:92%; --r:3deg;">Verta Clinic</span>
-  <span class="scribble" style="--x:80%; --y:86%; --r:-3deg;">Kastl Mfg</span>
+  <figure class="ph" style="--x:27%; --y:44%; --w:20%; --r:4deg;"><img src="images/15.jpg" width="1000" height="667" alt="Code on a laptop beside a plant" /></figure>
+  <figure class="ph" style="--x:53%; --y:4%;  --w:20%; --r:-3deg;"><img src="images/21.jpg" width="667" height="1000" alt="Two colleagues working over charts" /></figure>
+  <figure class="ph" style="--x:78%; --y:46%; --w:20%; --r:5deg;"><img src="images/23.jpg" width="1000" height="668" alt="A robotic arm handing something over" /></figure>
+  <span class="scribble" style="--x:20%; --y:88%; --r:-6deg;">grounded answers</span>
+  <span class="scribble" style="--x:50%; --y:92%; --r:3deg;">real tool calls</span>
+  <span class="scribble" style="--x:80%; --y:86%; --r:-3deg;">self-check</span>
 </div>
 
 <!-- ============ ABOUT 2 ============ -->
 <section class="says says--center">
-  <p>Today I design and ship AI-driven automations for teams of ten to five hundred people. The good ones are invisible: tickets answer themselves, invoices reconcile overnight, the Monday report writes itself. Outside of work I'm endlessly curious about how people actually behave around systems they didn't ask for — which is why I spend as much time on training and change management as on code. Success isn't how clever the system is. It's how many hours nobody has to spend anymore.</p>
+  <p>Every project starts with a working demo you can click, not a slide deck. The good automations are invisible: questions answer themselves, leads file themselves, content ships without a human in the loop. I'd rather spend twenty minutes understanding your process than send a generic proposal &mdash; and I'll tell you honestly whether AI is the right fix or a waste of your money.</p>
 </section>
 
 <!-- ============ TIMELINE ============ -->
@@ -223,7 +218,7 @@
 
   <div class="timeline__meta">
     <p class="timeline__hint"><span class="timeline__wheel"></span> Scroll sideways</p>
-    <p class="timeline__count"><b id="tlIndex">01</b> / <span id="tlTotal">07</span></p>
+    <p class="timeline__count"><b id="tlIndex">01</b> / <span id="tlTotal">05</span></p>
   </div>
 
   <div class="timeline__scroll" id="timelineScroll">
@@ -231,51 +226,37 @@
 
       <article class="tl">
         <b>2026</b>
-        <h3>Currently</h3>
+        <h3>AI automation, freelance</h3>
         <img src="images/24.jpg" width="1000" height="667" alt="A robotic hand and a human hand reaching towards each other" />
-        <p>Today I run automation programmes end to end — from the first process map to the eval suite that keeps an agent honest six months after launch.</p>
+        <p>Building AI chatbots, agents and content pipelines for content and marketing teams &mdash; each project shipped with a live demo you can click.</p>
       </article>
 
       <article class="tl">
         <b>2025</b>
-        <h3>Kastl Ops Reporting</h3>
-        <img src="images/19.jpg" width="667" height="1000" alt="Analyst pointing at a chart on a laptop beside printed reports" />
-        <p>Built a daily production digest that assembles itself from four disconnected systems and writes the summary in plain language. Two analysts stopped copy-pasting for good.</p>
+        <h3>Multi-agent content bot</h3>
+        <img src="images/19.jpg" width="667" height="1000" alt="Analyst pointing at a chart on a laptop" />
+        <p>A Telegram bot where sub-agents research a topic with live web search, write in the brand voice, fact-check and publish a finished post with a cover &mdash; no human in the loop.</p>
+      </article>
+
+      <article class="tl">
+        <b>2025</b>
+        <h3>AI enrolment assistant</h3>
+        <img src="images/4.jpg" width="667" height="1000" alt="An AI assistant interface open on a screen" />
+        <p>A source-grounded RAG chatbot that answers pricing and scheduling questions and books trials &mdash; with a self-check layer so it never invents a fact. Live on Render.</p>
       </article>
 
       <article class="tl">
         <b>2024</b>
-        <h3>Verta Clinic Intake</h3>
-        <img src="images/18.jpg" width="667" height="1000" alt="Two people reading code on a laptop in a dark office" />
-        <p>Patient forms triaged, records pre-filled and appointments booked without a phone call — cutting no-shows by more than half in the first quarter.</p>
+        <h3>Going deep on LLM apps</h3>
+        <img src="images/18.jpg" width="667" height="1000" alt="Two people reading code on a laptop" />
+        <p>RAG, tool-calling, memory, agent orchestration and prompt engineering &mdash; hand-built, without leaning on heavy frameworks, to actually understand what makes an AI reliable.</p>
       </article>
 
       <article class="tl">
-        <b>2023</b>
-        <h3>Nordwell AI Desk</h3>
-        <img src="images/4.jpg" width="667" height="1000" alt="An AI assistant interface open on a screen" />
-        <p>Rebuilt a five-channel support operation around a source-grounded AI agent with confidence routing. 71% of tickets now close without a human touching them.</p>
-      </article>
-
-      <article class="tl">
-        <b>2022</b>
-        <h3>Lumen Invoice Engine</h3>
-        <img src="images/6.jpg" width="667" height="1000" alt="Hands typing on a laptop at a wooden desk" />
-        <p>PDF and email invoices parsed, validated against purchase orders and pushed straight into the ERP. Nine minutes of manual entry became twenty seconds.</p>
-      </article>
-
-      <article class="tl">
-        <b>2021</b>
-        <h3>First RPA Rollout</h3>
-        <img src="images/5.jpg" width="1000" height="667" alt="Two people watching a robot arm in a white studio" />
-        <p>The project that started it all: a back-office reconciliation bot that taught me automation succeeds or fails on change management, not on code.</p>
-      </article>
-
-      <article class="tl">
-        <b>2017</b>
-        <h3>Operations Years</h3>
-        <img src="images/14.jpg" width="612" height="323" alt="A person working late at a multi-screen workstation" />
-        <p>Nine years inside logistics, e-commerce support and back-office finance — learning exactly which parts of a working day nobody should be doing by hand.</p>
+        <b>2017&ndash;23</b>
+        <h3>Motion &amp; video production</h3>
+        <img src="images/14.jpg" width="612" height="323" alt="A person working at a multi-screen workstation" />
+        <p>Years in motion design and video editing &mdash; After Effects, delivery under deadline. Where I learned content operations from the inside, which is why my AI work fits how teams really work.</p>
       </article>
 
     </div>
@@ -288,7 +269,9 @@
 <section class="contact" id="contact">
   <div class="contact__head">
     <p class="contact__eyebrow">Contact</p>
-    <h2 class="contact__title">Got a process that eats your week? <em>Let's automate it.</em></h2>
+    <h2 class="contact__title">Something eating your team's week? <em>Let's automate it.</em></h2>
+    <!-- TODO: replace the href with your real Calendly link before sharing the site -->
+    <p class="contact__cta"><a class="oval" href="https://calendly.com/your-handle/15min" target="_blank" rel="noopener">Book a 15-min call <b>&#8599;</b></a></p>
   </div>
 
   <form class="form" id="contactForm" novalidate>
@@ -307,7 +290,7 @@
 
     <label class="field">
       <span>What should stop being manual?</span>
-      <textarea name="message" rows="4" placeholder="Describe the process, who runs it today and how often it happens…" required></textarea>
+      <textarea name="message" rows="4" placeholder="Describe the process, who runs it today and how often it happens&hellip;" required></textarea>
       <em class="field__err" data-err="message"></em>
     </label>
 
@@ -323,16 +306,15 @@
   <p class="foot__label">Email</p>
   <a class="foot__mail" href="mailto:kovalev4041@gmail.com">kovalev4041@gmail.com</a>
 
-  <!-- TODO: replace # with your real profile links -->
   <div class="foot__socials">
-    <a href="#" target="_blank" rel="noopener"><i class="ic">in</i> LinkedIn</a>
-    <a href="#" target="_blank" rel="noopener"><i class="ic">tg</i> Telegram</a>
+    <a href="https://www.upwork.com/freelancers/~0150fdf67bd1039708" target="_blank" rel="noopener"><i class="ic">Up</i> Upwork</a>
+    <a href="https://t.me/youfitmy_bot" target="_blank" rel="noopener"><i class="ic">tg</i> Demo bot</a>
   </div>
 
   <div class="foot__bar">
-    <p>&copy; <span id="year">2026</span> Copyright Dmitry Kovalev</p>
+    <p>&copy; <span id="year">2026</span> Dmitry Kovalev</p>
     <a href="#top" class="foot__top" aria-label="Back to top">&#8593;</a>
-    <p>Automating the boring since 2021</p>
+    <p>AI automation &middot; demos you can click</p>
   </div>
 </footer>
 
