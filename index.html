@@ -178,10 +178,10 @@
     <img src="images/20.jpg" width="1000" height="667" alt="Content and charts on a desk" />
     <b>AI CONTENT BOT</b><span>topic &rarr; published post &middot; live in Telegram</span>
   </a>
-  <div class="floater" style="--r:4deg;">
-    <img src="images/8.jpg" width="612" height="408" alt="Two people reviewing paperwork" />
-    <b>AI + VIDEO PIPELINE</b><span>article &rarr; short vertical video &middot; in progress</span>
-  </div>
+  <button type="button" class="floater floater--play" style="--r:4deg;" data-reel aria-label="Play the AI Reel Maker sample video">
+    <img src="media/reel-poster.png" width="1000" height="1000" alt="AI Reel Maker — a sample vertical video generated from text" />
+    <b>AI + VIDEO PIPELINE</b><span>text &rarr; vertical video &middot; watch the reel</span>
+  </button>
   <div class="floater" style="--r:-3deg;">
     <img src="images/16.jpg" width="1000" height="667" alt="Colleagues at a meeting table" />
     <b>MULTI-NICHE TEMPLATE</b><span>config-driven &middot; new niche bot in ~2 days</span>
@@ -319,6 +319,18 @@
 </footer>
 
 </div><!-- /.site -->
+
+<!-- ============ REEL VIDEO MODAL ============ -->
+<div class="vmodal" id="reelModal" aria-hidden="true">
+  <div class="vmodal__backdrop" data-close></div>
+  <div class="vmodal__dialog" role="dialog" aria-modal="true" aria-label="AI Reel Maker sample video">
+    <button class="vmodal__close" type="button" data-close aria-label="Close video">&times;</button>
+    <video id="reelVideo" class="vmodal__video" controls playsinline preload="none"
+           poster="media/reel-modal-poster.jpg" width="1080" height="1920">
+      <source src="media/reel-sample.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

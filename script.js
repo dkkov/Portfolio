@@ -415,4 +415,40 @@ document.addEventListener('DOMContentLoaded', () => {
     drift();
   }
 
+  /* ---------- reel video modal ---------- */
+  const reelModal = document.getElementById('reelModal');
+  const reelVideo = document.getElementById('reelVideo');
+  const reelTriggers = document.querySelectorAll('[data-reel]');
+
+  if (reelModal && reelVideo && reelTriggers.length) {
+    let lastFocus = null;
+
+    const openReel = () => {
+      lastFocus = document.activeElement;
+      reelModal.classList.add('is-open');
+      reelModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('is-modal');
+      // the click that opened the modal is the user gesture, so sound is allowed;
+      // preload="none" means the file only starts downloading now, on play
+      reelVideo.currentTime = 0;
+      const played = reelVideo.play();
+      if (played) played.catch(() => {});      // blocked? the controls are right there
+      reelModal.querySelector('.vmodal__close').focus();
+    };
+
+    const closeReel = () => {
+      reelVideo.pause();
+      reelModal.classList.remove('is-open');
+      reelModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('is-modal');
+      if (lastFocus) lastFocus.focus();
+    };
+
+    reelTriggers.forEach(t => t.addEventListener('click', openReel));
+    reelModal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeReel));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && reelModal.classList.contains('is-open')) closeReel();
+    });
+  }
+
 });

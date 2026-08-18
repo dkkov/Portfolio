@@ -344,6 +344,42 @@ body.is-loading{ overflow:hidden; }
 }
 .floater span{ display:block; margin-top:4px; font-size:10.5px; color:var(--soft); letter-spacing:.04em; }
 
+/* the reel card is a <button>: strip the native chrome so it reads as a floater */
+.floater--play{
+  -webkit-appearance:none; appearance:none; border:0; background:none;
+  padding:0; margin:0; width:100%; display:block; font:inherit; color:inherit;
+  text-align:left; cursor:pointer;
+}
+/* the poster already carries a play glyph; the hover-lift is the only extra cue */
+
+/* ---------- reel video modal ---------- */
+
+body.is-modal{ overflow:hidden; }
+
+.vmodal{
+  position:fixed; inset:0; z-index:300;
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; visibility:hidden; transition:opacity .3s var(--ease), visibility .3s var(--ease);
+}
+.vmodal.is-open{ opacity:1; visibility:visible; }
+.vmodal__backdrop{ position:absolute; inset:0; background:rgba(8,8,10,.86); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.vmodal__dialog{ position:relative; z-index:1; height:min(88vh,900px); max-width:94vw; }
+.vmodal__video{
+  height:100%; width:auto; max-width:100%; display:block;
+  aspect-ratio:9/16; object-fit:cover;      /* fixed 9:16 so the box never jumps on play */
+  border-radius:14px; background:#000; box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+.vmodal__close{
+  position:absolute; top:-14px; right:-14px; z-index:2;
+  width:40px; height:40px; border-radius:50%; border:0;
+  background:var(--bg); color:var(--ink); font-size:24px; line-height:1;
+  cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.4);
+}
+@media (max-width:640px){
+  .vmodal{ padding:14px; }
+  .vmodal__close{ top:-8px; right:-8px; }
+}
+
 /* ---------- narrative blocks ---------- */
 
 .says{ padding:clamp(46px,7vw,110px) var(--pad); }
