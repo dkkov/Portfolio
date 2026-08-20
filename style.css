@@ -506,7 +506,7 @@ body.is-modal{ overflow:hidden; }
 }
 .contact__title em{ font-weight:400; letter-spacing:-.02em; }
 /* the global margin reset left this glued to the heading above it */
-.contact__cta{ margin-top:clamp(30px,4vw,56px); }
+.contact__cta{ margin-top:clamp(38px,5vw,56px); }
 
 .form{ margin-top:clamp(34px,4.5vw,64px); max-width:760px; }
 .form__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2vw,26px); }
