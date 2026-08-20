@@ -339,7 +339,10 @@ body.is-loading{ overflow:hidden; }
 
 .scribble{
   position:absolute; left:var(--x); top:var(--y);
-  transform:rotate(var(--r)) translate(-50%,-50%);
+  /* translate first so the label centres on the anchor in screen space, then
+     rotate about that centre — order matters, and the reveal system no longer
+     overwrites this transform */
+  transform:translate(-50%,-50%) rotate(var(--r));
   font-family:'Caveat', cursive; font-weight:600; color:var(--green);
   font-size:clamp(14px,2.1vw,30px); white-space:nowrap; z-index:6;
 }
