@@ -56,8 +56,7 @@ body.is-loading{ overflow:hidden; }
    then WAAPI carries it the last stretch. Registered custom properties let the
    digits (--n) and the position (--p) animate together. */
 
-@property --p { syntax:'<percentage>'; inherits:false; initial-value:0%; }
-@property --n { syntax:'<integer>';    inherits:false; initial-value:0; }
+@property --n { syntax:'<integer>'; inherits:false; initial-value:0; }
 
 .loader{
   position:fixed; inset:0; z-index:200; background:var(--bg);
@@ -70,31 +69,41 @@ body.is-loading{ overflow:hidden; }
    fade the loader out as it starts; the backdrop is the page colour anyway */
 .loader.is-opening{ opacity:0; pointer-events:none; transition:opacity .45s var(--ease); }
 
-/* left:var(--p) puts the number's left edge at p% of the screen and the
-   translate pulls it back by p% of its own width, so at 0 the left edge sits
-   at the screen's left and at 100 the right edge sits at the screen's right */
+/* Fixed width so the box never resizes when the digit count changes (Anton has
+   no tabular figures and its "1" is much narrower), and the glide is a plain
+   transform so it runs on the compositor instead of janking on layout. */
 .loader__num{
-  position:absolute; bottom:clamp(10px,2.4vh,28px);
-  left:var(--p,0%); transform:translateX(calc(-1 * var(--p,0%)));
+  position:absolute; bottom:clamp(10px,2.4vh,28px); left:0;
+  width:1.5em; text-align:center;
   font-family:'Anton','Archivo',sans-serif;
   font-size:clamp(6rem,14vw,13rem); line-height:.8; color:var(--ink);
   white-space:nowrap; counter-reset:n var(--n,0);
-  animation:ldRun var(--run) linear forwards;
+  animation:ldMove var(--run) linear forwards, ldCount var(--run) linear forwards;
+  will-change:transform; backface-visibility:hidden;
 }
 .loader__num::after{ content:counter(n); }
 /* browsers without @property never animate the counter; hide it and just reveal */
 .loader.no-counter .loader__num{ display:none; }
 
-/* linear glide with three short holds, ending at 90 (the page-load gate) */
-@keyframes ldRun{
-  0%  { --p:0%;  --n:0; }
-  18% { --p:24%; --n:24; }
-  24% { --p:24%; --n:24; }
-  45% { --p:51%; --n:51; }
-  55% { --p:51%; --n:51; }
-  75% { --p:78%; --n:78; }
-  82% { --p:78%; --n:78; }
-  100%{ --p:90%; --n:90; }
+/* linear glide with three short holds, ending at 90% of the travel */
+/* 1.5em resolves against the number's own font-size, matching its box width */
+@keyframes ldMove{
+  0%  { transform:translateX(0); }
+  18% { transform:translateX(calc((100vw - 1.5em) * .24)); }
+  24% { transform:translateX(calc((100vw - 1.5em) * .24)); }
+  45% { transform:translateX(calc((100vw - 1.5em) * .51)); }
+  55% { transform:translateX(calc((100vw - 1.5em) * .51)); }
+  75% { transform:translateX(calc((100vw - 1.5em) * .78)); }
+  82% { transform:translateX(calc((100vw - 1.5em) * .78)); }
+  100%{ transform:translateX(calc((100vw - 1.5em) * .90)); }
+}
+/* the digits step up in lockstep with the glide, holding at the same marks */
+@keyframes ldCount{
+  0%  { --n:0; }
+  18% { --n:24; } 24% { --n:24; }
+  45% { --n:51; } 55% { --n:51; }
+  75% { --n:78; } 82% { --n:78; }
+  100%{ --n:90; }
 }
 
 /* ---------- site reveal: a square opens out of the centre ----------

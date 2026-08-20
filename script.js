@@ -86,7 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
          page, then WAAPI carries the counter home (it overrides the CSS one). */
       const runSettle = () => {
         loaderNum.animate(
-          [{ '--p': '90%', '--n': '90' }, { '--p': '100%', '--n': '100' }],
+          [
+            { transform: 'translateX(calc((100vw - 1.5em) * .90))', '--n': '90' },
+            { transform: 'translateX(calc((100vw - 1.5em) * 1))',   '--n': '100' }
+          ],
           { duration: seen ? 300 : 560, easing: 'ease-out', fill: 'forwards' }
         ).finished.then(() => setTimeout(finish, 200)).catch(() => setTimeout(finish, 200));
       };
