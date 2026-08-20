@@ -6,27 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- loader: a counter glides across, then the site opens ---------- */
+  /* ---------- loader: a bar across the top, then the site opens ---------- */
   const loader = document.getElementById('loader');
-  const loaderNum = document.getElementById('loaderNum');
+  const loaderFill = document.getElementById('loaderFill');
   const site = document.getElementById('site');
 
   if (loader) {
     // the flag itself is set by the inline script in <head>, before first paint
     const seen = document.documentElement.dataset.seen === '1';
-    const hasProperty = typeof CSS !== 'undefined' && typeof CSS.registerProperty === 'function';
 
     let pageLoaded = false;
     window.addEventListener('load', () => { pageLoaded = true; });
 
-    let revealing = false;
-
-    /* a square grows out of the CENTRE OF THE SCREEN, uncovering the page.
-       Insets are in pixels because the .site box is the whole document, so the
-       bottom/right edges have to be measured against its real height, not a
-       percentage of it. */
+    /* a square grows out of the centre of the screen, uncovering the page.
+       Insets are in pixels: the .site box is the whole document, so the
+       bottom/right edges have to be measured against its real height. */
     const openSquare = () => {
-      const DUR = seen ? 700 : 1800;          // matches the instructor's 1.8s reveal
+      const DUR = seen ? 700 : 1400;
       const halfW = window.innerWidth / 2;
       const halfH = window.innerHeight / 2;
       const maxR = Math.max(window.innerWidth, window.innerHeight) / 2 * 1.02;
@@ -44,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
       draw(0);
       site.classList.remove('is-hidden');
       site.classList.add('is-revealing');
-      loader.classList.add('is-opening');     // fade the number out as the square grows
+      loader.classList.add('is-opening');   // drop the bar before the square gets there
 
       const t0 = performance.now();
       const step = now => {
         const t = Math.min((now - t0) / DUR, 1);
-        draw(t * t * (3 - 2 * t) * maxR);      // gentle at both ends, like the site's easing
+        draw(t * t * (3 - 2 * t) * maxR);             // gentle at both ends
         if (t < 1) { requestAnimationFrame(step); return; }
 
         // clip-path would make .site the containing block for the fixed top bar
@@ -64,8 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const finish = () => {
-      if (revealing) return;
-      revealing = true;
       if (reduceMotion) {
         site.classList.remove('is-hidden');
         document.body.classList.remove('is-loading');
@@ -76,38 +70,43 @@ document.addEventListener('DOMContentLoaded', () => {
       openSquare();
     };
 
-    if (!hasProperty || reduceMotion) {
-      // no animated counter here; just hold the paper a beat, then reveal
-      loader.classList.add('no-counter');
-      setTimeout(finish, reduceMotion ? 0 : (seen ? 500 : 1200));
+    /* Phase one — 0 → 94 — is the CSS animation above; it is already running by
+       the time this file executes. All that is left here is the last stretch to
+       100 once the browser reports the page in, and the hand-off to the reveal. */
+
+    const HOLD = 0.94;
+    const SETTLE = 560;
+    const EASE_OUT = t => t * t * (3 - 2 * t);          // smoothstep
+
+    // the last 6% — transform only again, so it stays on the compositor
+    const runSettle = () => {
+      const stops = Array.from({ length: 21 }, (_, i) => {
+        const t = i / 20;
+        return { offset: t, transform: `scaleX(${(HOLD + (1 - HOLD) * EASE_OUT(t)).toFixed(5)})` };
+      });
+
+      const bar = loaderFill.animate(stops, { duration: SETTLE, easing: 'linear', fill: 'forwards' });
+      bar.finished.then(() => setTimeout(finish, 200)).catch(() => {});   // let it sit full
+    };
+
+    if (reduceMotion) {
+      setTimeout(finish, 200);                    // no animationend will ever fire
     } else {
-      /* Phase one — 0 → 90 — is the CSS animation on the number, already running
-         by the time this file executes. The last stretch to 100 waits for the
-         page, then WAAPI carries the counter home (it overrides the CSS one). */
-      const runSettle = () => {
-        loaderNum.animate(
-          [
-            { transform: 'translateX(calc((100vw - 1.5em) * .90))', '--n': '90' },
-            { transform: 'translateX(calc((100vw - 1.5em) * 1))',   '--n': '100' }
-          ],
-          { duration: seen ? 300 : 560, easing: 'ease-out', fill: 'forwards' }
-        ).finished.then(() => setTimeout(finish, 200)).catch(() => setTimeout(finish, 200));
-      };
+      // the CSS phase ends on the bar; whichever happens last wins
+      const barAnim = loaderFill.getAnimations()[0];
+      const phaseOne = barAnim ? barAnim.finished : Promise.resolve();
 
-      const phaseAnim = loaderNum.getAnimations()[0];
-      const phaseOne = phaseAnim ? phaseAnim.finished
-        : new Promise(r => setTimeout(r, seen ? 900 : 2400));
-
-      // don't park forever on a slow image: the fold is in well before then
-      const loaded = pageLoaded ? Promise.resolve()
+      // Waiting on window.load alone means parking on 94 for as long as the
+      // slowest image takes. Cap it: everything above the fold is in by then,
+      // and the rest of the pictures are lazy anyway.
+      const loaded = pageLoaded
+        ? Promise.resolve()
         : Promise.race([
             new Promise(done => window.addEventListener('load', done, { once: true })),
-            new Promise(done => setTimeout(done, 2000))
+            new Promise(done => setTimeout(done, 1800))
           ]);
 
-      Promise.all([phaseOne, loaded]).then(runSettle).catch(runSettle);
-      // last-resort safety: never leave the page hidden
-      setTimeout(() => { if (document.body.classList.contains('is-loading')) finish(); }, 7000);
+      Promise.all([phaseOne, loaded]).then(runSettle).catch(() => {});
     }
   }
 
