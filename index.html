@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 
 <!-- without JS the loader never runs, so the page must not stay hidden -->
@@ -38,9 +38,12 @@
 </head>
 <body class="is-loading">
 
-<!-- ============ LOADER ============ -->
+<!-- ============ LOADER ============
+     A big counter glides from the left edge to the right as it counts up, then
+     the site opens with a square from the centre. The count-up runs in CSS so
+     it is moving on the first painted frame, before script.js parses. -->
 <div class="loader" id="loader">
-  <div class="loader__bar"><i id="loaderFill"></i></div>
+  <span class="loader__num" id="loaderNum" aria-hidden="true"></span>
 </div>
 
 <div class="site is-hidden" id="site">

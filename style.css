@@ -49,43 +49,52 @@ ul,ol,dl{ list-style:none; }
 
 body.is-loading{ overflow:hidden; }
 
-/* The bar runs in CSS so it starts on the very first painted frame, and it
-   animates transform only, so the compositor owns it and a main thread busy
-   with page load cannot stall it. Both were real faults before: the motion
-   used to wait for script.js (which sits after all the markup) and it used to
-   be written frame by frame into width, forcing layout every frame. */
+/* A big number counts 1 -> 100 while it rides from the left edge to the right,
+   then the site opens with a square from the centre. The count-up is CSS so it
+   is moving on the first painted frame; script.js sits after all the markup and
+   would otherwise leave it frozen. It holds at 90 until the page has loaded,
+   then WAAPI carries it the last stretch. Registered custom properties let the
+   digits (--n) and the position (--p) animate together. */
+
+@property --p { syntax:'<percentage>'; inherits:false; initial-value:0%; }
+@property --n { syntax:'<integer>';    inherits:false; initial-value:0; }
 
 .loader{
   position:fixed; inset:0; z-index:200; background:var(--bg);
-  --run:3200ms;
+  --run:2400ms;
 }
 :root[data-seen="1"] .loader{ --run:900ms; }   /* already seen it this session */
 .loader.is-done{ opacity:0; pointer-events:none; transition:opacity .8s var(--ease); }
 
-/* The square opens from the middle, so it does not reach the top edge until
-   well over half way through. Until then the finished progress bar just sits
-   there, and then swaps abruptly for the nav. Fade the loader as the square
-   starts growing: its background is the same colour as the page, so only the
-   bar actually goes anywhere. */
+/* the square opens from the middle and takes a moment to reach the edges, so
+   fade the loader out as it starts; the backdrop is the page colour anyway */
 .loader.is-opening{ opacity:0; pointer-events:none; transition:opacity .45s var(--ease); }
 
-/* hairline across the very top, filling left to right */
-.loader__bar{
-  position:absolute; top:0; left:0; right:0; height:2px; background:var(--line);
+/* left:var(--p) puts the number's left edge at p% of the screen and the
+   translate pulls it back by p% of its own width, so at 0 the left edge sits
+   at the screen's left and at 100 the right edge sits at the screen's right */
+.loader__num{
+  position:absolute; bottom:clamp(10px,2.4vh,28px);
+  left:var(--p,0%); transform:translateX(calc(-1 * var(--p,0%)));
+  font-family:'Anton','Archivo',sans-serif;
+  font-size:clamp(6rem,14vw,13rem); line-height:.8; color:var(--ink);
+  white-space:nowrap; counter-reset:n var(--n,0);
+  animation:ldRun var(--run) linear forwards;
 }
-.loader__bar i{
-  position:absolute; inset:0; display:block; background:var(--ink);
-  transform:scaleX(0); transform-origin:left center;
-  will-change:transform; backface-visibility:hidden;
-  animation:dkBar var(--run) linear forwards;
-}
+.loader__num::after{ content:counter(n); }
+/* browsers without @property never animate the counter; hide it and just reveal */
+.loader.no-counter .loader__num{ display:none; }
 
-/* 1 - (1-t)^2.2, stopping at 94% — the last 6 wait for the page to finish */
-@keyframes dkBar{
-  0%{transform:scaleX(0)}      10%{transform:scaleX(.1945)} 20%{transform:scaleX(.3646)}
-  30%{transform:scaleX(.5112)} 40%{transform:scaleX(.6345)} 50%{transform:scaleX(.7354)}
-  60%{transform:scaleX(.8148)} 70%{transform:scaleX(.8735)} 80%{transform:scaleX(.9127)}
-  90%{transform:scaleX(.9341)} 100%{transform:scaleX(.94)}
+/* linear glide with three short holds, ending at 90 (the page-load gate) */
+@keyframes ldRun{
+  0%  { --p:0%;  --n:0; }
+  18% { --p:24%; --n:24; }
+  24% { --p:24%; --n:24; }
+  45% { --p:51%; --n:51; }
+  55% { --p:51%; --n:51; }
+  75% { --p:78%; --n:78; }
+  82% { --p:78%; --n:78; }
+  100%{ --p:90%; --n:90; }
 }
 
 /* ---------- site reveal: a square opens out of the centre ----------
