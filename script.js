@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- scroll reveal ---------- */
   const targets = document.querySelectorAll(
-    '.bigname, .hero__disciplines li, .hero__photo, .hero__frame, .project__head, .credits, ' +
+    '.bigname, .hero__arrow, .hero__disciplines li, .hero__photo, .hero__frame, .project__head, .credits, ' +
     '.project__left, .ph, .scribble, .floater, .says p, .tl, ' +
     '.contact__eyebrow, .contact__title, .form, ' +
     '.foot__label, .foot__mail, .foot__socials'

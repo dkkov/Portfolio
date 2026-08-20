@@ -183,6 +183,24 @@ body.is-loading{ overflow:hidden; }
   display:grid; grid-template-columns:1fr auto; gap:30px; align-items:end;
 }
 
+/* left column: the hand-drawn arrow sits above the disciplines and points
+   down at them; both hug the bottom of the tall hero row like the list did */
+.hero__lead{ display:flex; flex-direction:column; justify-content:flex-end; }
+
+.hero__arrow{
+  width:clamp(50px,5vw,78px); height:auto; margin:0 0 26px 4px;
+  color:var(--ink); overflow:visible;
+}
+.hero__arrow path{
+  /* pathLength is normalised to 100, so this draws the whole stroke regardless
+     of the curve's real length */
+  stroke-dasharray:100; stroke-dashoffset:100;
+}
+.hero__arrow.is-in path{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset 1s var(--ease) .15s;
+}
+
 .hero__disciplines li{
   font-family:'Instrument Serif', Georgia, serif;
   font-size:clamp(24px,3.7vw,54px); line-height:1.24; letter-spacing:-.015em;
@@ -676,6 +694,7 @@ body.is-modal{ overflow:hidden; }
 @media (max-width:640px){
   .hero{ grid-template-columns:1fr; }
   .hero__photo{ width:min(78%, 320px); margin-left:auto; }
+  .hero__arrow{ display:none; }   /* keeps the narrow hero uncluttered */
 
   /* the oval used to sit beside the heading and land on top of it once the
      heading wrapped onto two lines; below it, upright, there is nothing to hit */
